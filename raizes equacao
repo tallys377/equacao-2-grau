@@ -1,0 +1,40 @@
+import tkinter as tk
+from tkinter import messagebox
+import cmath
+
+def resolver_equacao_segundo_grau(a, b, c):
+    delta = cmath.sqrt(b**2 - 4*a*c)
+    x1 = (-b + delta) / (2 * a)
+    x2 = (-b - delta) / (2 * a)
+    return x1, x2
+
+def calcular():
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        c = float(entry_c.get())
+        x1, x2 = resolver_equacao_segundo_grau(a, b, c)
+        resultado = f"As raízes são: {x1} e {x2}"
+        messagebox.showinfo("Resultado", resultado)
+    except ValueError:
+        messagebox.showerror("Erro", "Por favor, insira valores numéricos válidos")
+
+# Configurando a interface gráfica
+janela = tk.Tk()
+janela.title("Calculadora de Equação do 2º Grau")
+
+tk.Label(janela, text="a:").grid(row=0)
+tk.Label(janela, text="b:").grid(row=1)
+tk.Label(janela, text="c:").grid(row=2)
+
+entry_a = tk.Entry(janela)
+entry_b = tk.Entry(janela)
+entry_c = tk.Entry(janela)
+
+entry_a.grid(row=0, column=1)
+entry_b.grid(row=1, column=1)
+entry_c.grid(row=2, column=1)
+
+tk.Button(janela, text="Calcular", command=calcular).grid(row=3, column=1)
+
+janela.mainloop()
